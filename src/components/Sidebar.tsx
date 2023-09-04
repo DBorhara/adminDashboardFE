@@ -12,6 +12,7 @@ import {
   TrendingUp,
   WorkOutline,
 } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
@@ -20,10 +21,12 @@ export default function Sidebar() {
         <div className="mb-[10px]">
           <h3 className="text-sm text-slate-400">Dashboard</h3>
           <ul className=" list-none p-2">
-            <li className="p-2 cursor-pointer flex items-center rounded-[10px] hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white">
-              <LineStyle className="!mr-[5px] !text-lg" />
-              Home
-            </li>
+            <Link to={`/`} className=" no-underline color-inherit">
+              <li className="p-2 cursor-pointer flex items-center rounded-[10px] hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white">
+                <LineStyle className="!mr-[5px] !text-lg" />
+                Home
+              </li>
+            </Link>
             <li className="p-2 cursor-pointer flex items-center rounded-[10px] hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white">
               <Timeline className="!mr-[5px] !text-lg" />
               Analytics
@@ -37,14 +40,18 @@ export default function Sidebar() {
         <div className="mb-[10px]">
           <h3 className="text-sm text-slate-400">Quick Menu</h3>
           <ul className=" list-none p-2">
-            <li className="p-2 cursor-pointer flex items-center rounded-[10px] hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white">
-              <PermIdentity className="!mr-[5px] !text-lg" />
-              Users
-            </li>
-            <li className="p-2 cursor-pointer flex items-center rounded-[10px] hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white">
-              <Storefront className="!mr-[5px] !text-lg" />
-              Products
-            </li>
+            <Link to={`/users`} className=" no-underline color-inherit">
+              <li className="p-2 cursor-pointer flex items-center rounded-[10px] hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white">
+                <PermIdentity className="!mr-[5px] !text-lg" />
+                Users
+              </li>
+            </Link>
+            <Link to={`/products`}>
+              <li className="p-2 cursor-pointer flex items-center rounded-[10px] hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white">
+                <Storefront className="!mr-[5px] !text-lg" />
+                Products
+              </li>
+            </Link>
             <li className="p-2 cursor-pointer flex items-center rounded-[10px] hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white">
               <AttachMoney className="!mr-[5px] !text-lg" />
               Transactions
