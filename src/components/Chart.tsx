@@ -14,7 +14,7 @@ export default function Chart({
   grid,
 }: {
   title: string;
-  data: { month: string; "Active Users": number }[];
+  data: any;
   dataKey: string;
   grid: boolean;
 }) {
