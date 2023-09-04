@@ -1,5 +1,6 @@
-import Sidebar from "./components/sidebar/Sidebar";
-import Topbar from "./components/topbar/Topbar";
+import AppRoutes from "./Routes";
+import Sidebar from "./components/Sidebar";
+import Topbar from "./components/Topbar";
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
       <Topbar />
       <div className="flex">
         <Sidebar />
-        <div className="flex-4">other pages</div>
+        <AppRoutes />
       </div>
     </>
   );
