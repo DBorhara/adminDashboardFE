@@ -2,7 +2,7 @@ export default function NewUser() {
   return (
     <div className="flex-4">
       <h1 className="text-2xl font-bold mb-4">New User</h1>
-      <form className="flex flex-wrap">
+      <form className="grid grid-cols-2">
         <div className="w-[400px] flex flex-col mt-2.5 mr-5">
           <label className="mb-2.5 text-sm font-semibold text-gray-600">
             Username
@@ -91,7 +91,7 @@ export default function NewUser() {
             <option value="no">No</option>
           </select>
         </div>
-        <button className="w-50 border-0 bg-blue-900 text-white py-2 px-2.5 font-semibold rounded-lg mt-8 cursor-pointer">
+        <button className="w-52 border-0 bg-blue-900 text-white py-2 px-2.5 font-semibold rounded-lg mt-8 cursor-pointer">
           Create
         </button>
       </form>
