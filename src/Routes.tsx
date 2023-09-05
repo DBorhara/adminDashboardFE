@@ -7,19 +7,29 @@ import NewUser from "./pages/NewUser";
 import ProductList from "./pages/ProductList";
 import Product from "./pages/Product";
 import NewProduct from "./pages/NewProduct";
+import { Login } from "@mui/icons-material";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
-interface AppRouteProps {}
+/**
+ * Interface for AppRoutes component props
+ */
+interface AppRoutesProps {
+  isLoggedIn: boolean;
+}
 
-const AppRoutes: React.FC<AppRouteProps> = () => {
+const AppRoutes: React.FC<AppRoutesProps> = ({ isLoggedIn }) => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/users" element={<UserList />} />
-      <Route path="/user/:id" element={<User />} />
-      <Route path="/newUser" element={<NewUser />} />
-      <Route path="/products" element={<ProductList />} />
-      <Route path="/product/:id" element={<Product />} />
-      <Route path="/newProduct" element={<NewProduct />} />
+      <Route path="/login" element={<Login />} />
+      <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/users" element={<UserList />} />
+        <Route path="/user/:id" element={<User />} />
+        <Route path="/newUser" element={<NewUser />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="/newProduct" element={<NewProduct />} />
+      </Route>
     </Routes>
   );
 };

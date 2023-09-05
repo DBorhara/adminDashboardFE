@@ -1,15 +1,25 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { DeleteOutline } from "@mui/icons-material";
-import { productRows } from "../dummydata";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function ProductList() {
-  const [data, setData] = useState(productRows);
+  const [data, setData] = useState<any[]>([]);
 
-  const handleDelete = (id: number) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+  useEffect(() => {
+    async function getProducts() {
+      const { data } = await axios.get(
+        "http://localhost:8080/api/product/allProducts"
+      );
+      setData(data);
+    }
+    getProducts();
+  }, []);
+
+  // const handleDelete = (id: number) => {
+  //   setData(data.filter((item) => item.id !== id));
+  // };
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 90 },
@@ -47,7 +57,7 @@ export default function ProductList() {
             </Link>
             <DeleteOutline
               className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(params.row.id)}
+              // onClick={() => handleDelete(params.row.id)}
             />
           </>
         );
@@ -62,10 +72,10 @@ export default function ProductList() {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
+            paginationModel: { page: 0, pageSize: 20 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5, 10, 20]}
         checkboxSelection
         disableRowSelectionOnClick
       />

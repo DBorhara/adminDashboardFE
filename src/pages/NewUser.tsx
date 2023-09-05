@@ -91,6 +91,20 @@ export default function NewUser() {
             <option value="no">No</option>
           </select>
         </div>
+        <div className="w-[400px] flex flex-col mt-2.5 mr-5">
+          <label className="mb-2.5 text-sm font-semibold text-gray-600">
+            Admin
+          </label>
+          <select
+            name="active"
+            id="active"
+            defaultValue={`no`}
+            className="h-10 rounded-md"
+          >
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
         <button className="w-52 border-0 bg-blue-900 text-white py-2 px-2.5 font-semibold rounded-lg mt-8 cursor-pointer">
           Create
         </button>

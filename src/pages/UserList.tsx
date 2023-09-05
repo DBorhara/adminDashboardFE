@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { DeleteOutline } from "@mui/icons-material";
-import { userRows } from "../dummydata";
+import axios from "axios";
 
 export default function UserList() {
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState<any[]>([]);
 
-  const handleDelete = (id: number) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+  useEffect(() => {
+    async function getUsers() {
+      const { data } = await axios.get(
+        "http://localhost:8080/api/user/allUsers"
+      );
+
+      setData(data);
+    }
+    getUsers();
+  }, []);
+
+  // const handleDelete = (id: number) => {
+  //   setData(data.filter((item) => item.id !== id));
+  // };
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 90 },
@@ -32,7 +43,7 @@ export default function UserList() {
     },
     { field: "email", headerName: "Email", width: 200 },
     { field: "status", headerName: "Status", width: 120 },
-    { field: "transaction", headerName: "Transaction", width: 160 },
+    { field: "isAdmin", headerName: "Admin", width: 160 },
     {
       field: "action",
       headerName: "Action",
@@ -47,7 +58,7 @@ export default function UserList() {
             </Link>
             <DeleteOutline
               className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(params.row.id)}
+              // onClick={() => handleDelete(params.row.id)}
             />
           </>
         );
@@ -62,10 +73,10 @@ export default function UserList() {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
+            paginationModel: { page: 0, pageSize: 20 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5, 10, 20]}
         checkboxSelection
         disableRowSelectionOnClick
       />
