@@ -33,7 +33,7 @@ export default function User() {
     getUser();
   }, []);
 
-  const updateUserHandler = (event) => {};
+  const updateUserHandler = () => {};
   return (
     <div className="flex-4 p-5">
       <div className="flex items-center justify-between">
