@@ -1,11 +1,13 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { DeleteOutline } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../components/Loading";
 
-export default function ProductList() {
+const ProductList: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function getProducts() {
@@ -13,6 +15,7 @@ export default function ProductList() {
         "http://localhost:8080/api/product/allProducts"
       );
       setData(data);
+      setIsLoading(false);
     }
     getProducts();
   }, []);
@@ -65,6 +68,14 @@ export default function ProductList() {
     },
   ];
 
+  if (isLoading) {
+    return (
+      <div className="flex-4">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
     <div className="flex-4">
       <DataGrid
@@ -81,4 +92,6 @@ export default function ProductList() {
       />
     </div>
   );
-}
+};
+
+export default ProductList;

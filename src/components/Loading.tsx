@@ -1,6 +1,7 @@
+import React from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 
-export default function Loading() {
+const Loading: React.FC = () => {
   return (
     <Box
       display="flex"
@@ -15,4 +16,6 @@ export default function Loading() {
       <CircularProgress size={80} />
     </Box>
   );
-}
+};
+
+export default Loading;

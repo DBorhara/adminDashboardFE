@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 
 interface CustomError {
   name: string;
@@ -11,7 +11,7 @@ interface FormState {
   password: string;
 }
 
-export default function Login() {
+const Login: React.FC = () => {
   const [error] = useState<CustomError | null>(null);
   const [formState, setFormState] = useState<FormState>({
     email: "",
@@ -21,7 +21,7 @@ export default function Login() {
   //   const dispatch = useAppDispatch();
 
   const handleLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    // e.preventDefault();
+    e.preventDefault();
     // try {
     //   await dispatch(login(formState)).unwrap();
     // } catch (error: any) {
@@ -34,12 +34,25 @@ export default function Login() {
   };
 
   return (
-    <div className="mb-4 flex w-full flex-col items-center rounded bg-white px-8 pb-8 pt-6">
+    <div className="flex items-center">
+      <div className="flex h-screen flex-col flex-4 bg-teal-200">
+        <div className="w-full h-full flex justify-center items-center">
+          <img
+            className="object-contain max-h-full max-w-full"
+            src="src/assets/loginbg.png"
+          />
+        </div>
+      </div>
+
       <form
-        className="mb-4 w-full rounded bg-white px-8 pb-8 pt-6 shadow-md md:w-3/12"
+        className="flex-1 w-full rounded shadow-lg px-8 pb-8 pt-6"
         onSubmit={handleLoginSubmit}
         name="login"
       >
+        <div className="flex justify-center items-center">
+          <img className="w-20" src="public/logo.svg" />
+        </div>
+        <div className="text-3xl text-center pb-5">Control Tower</div>
         <div className="mb-4">
           <label
             className="mb-2 block text-sm font-bold text-gray-700"
@@ -88,4 +101,6 @@ export default function Login() {
       </form>
     </div>
   );
-}
+};
+
+export default Login;

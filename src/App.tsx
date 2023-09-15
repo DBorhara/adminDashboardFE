@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import AppRoutes from "./Routes";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
-import Loading from "./pages/Loading";
+import Loading from "./components/Loading";
 import Login from "./pages/Login";
 
 // async function getLoginState() {
@@ -26,8 +25,7 @@ function useLoginState(): [boolean, object] {
 }
 
 function App() {
-  // const isLoggedIn: [boolean, {}] = useLoginState();
-  const isLoggedIn: any = useLoginState();
+  const isLoggedIn: [boolean, object] = useLoginState();
 
   if (isLoggedIn === undefined) {
     return <Loading />;

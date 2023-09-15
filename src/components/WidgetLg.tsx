@@ -1,31 +1,35 @@
-export default function WidgetLg() {
-  const Button = ({ type }: { type: string }) => {
-    switch (type) {
-      case "Approved":
-        return (
-          <button className="py-1.5 px-2 rounded-xl bg-green-100 text-green-500">
-            {type}
-          </button>
-        );
-      case "Declined":
-        return (
-          <button className={"py-1.5 px-2 rounded-xl bg-red-100 text-red-500"}>
-            {type}
-          </button>
-        );
-      case "Pending":
-        return (
-          <button
-            className={"py-1.5 px-2 rounded-xl bg-blue-100 text-blue-500"}
-          >
-            {type}
-          </button>
-        );
-      default:
-        break;
-    }
-  };
+import React from 'react'
 
+interface ButtonProps {
+  type: "Approved" | "Declined" | "Pending";
+}
+
+const Button: React.FC<ButtonProps> = ({ type }) => {
+  switch (type) {
+    case "Approved":
+      return (
+        <button className="py-1.5 px-2 rounded-xl bg-green-100 text-green-500">
+          {type}
+        </button>
+      );
+    case "Declined":
+      return (
+        <button className="py-1.5 px-2 rounded-xl bg-red-100 text-red-500">
+          {type}
+        </button>
+      );
+    case "Pending":
+      return (
+        <button className="py-1.5 px-2 rounded-xl bg-blue-100 text-blue-500">
+          {type}
+        </button>
+      );
+    default:
+      return null;
+  }
+};
+
+const WidgetLg: React.FC = () => {
   return (
     <div className="flex-2 shadow-featuredInfoBoxShadow p-5">
       <h3 className="text-2xl font-semibold">Latest Transactions</h3>
@@ -103,4 +107,5 @@ export default function WidgetLg() {
       </table>
     </div>
   );
-}
+};
+export default WidgetLg;

@@ -7,7 +7,7 @@ import {
   Publish,
 } from "@mui/icons-material";
 import axios, { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 interface IUser {
@@ -19,7 +19,7 @@ interface IUser {
   isAdmin: boolean;
 }
 
-export default function User() {
+const User: React.FC = () => {
   const { id } = useParams();
   const [user, setUser] = useState<IUser | null>(null);
 
@@ -155,4 +155,5 @@ export default function User() {
       </div>
     </div>
   );
-}
+};
+export default User;

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   LineChart,
   Line,
@@ -7,17 +8,20 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function Chart({
-  title,
-  data,
-  dataKey,
-  grid,
-}: {
+interface IDataPoint {
+  month: string;
+  [key: string]: number | string;
+}
+
+interface ChartProps {
+  isLoading: boolean;
   title: string;
-  data: any;
+  data: IDataPoint[];
   dataKey: string;
   grid: boolean;
-}) {
+}
+
+const Chart: React.FC<ChartProps> = ({ title, data, dataKey, grid }) => {
   return (
     <div className="m-5 p-5 shadow-featuredInfoBoxShadow">
       <h3 className="mb-5">{title}</h3>
@@ -31,4 +35,6 @@ export default function Chart({
       </ResponsiveContainer>
     </div>
   );
-}
+};
+
+export default Chart;

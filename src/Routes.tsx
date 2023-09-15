@@ -7,7 +7,7 @@ import NewUser from "./pages/NewUser";
 import ProductList from "./pages/ProductList";
 import Product from "./pages/Product";
 import NewProduct from "./pages/NewProduct";
-import { Login } from "@mui/icons-material";
+import Login from "./pages/Login";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
 /**

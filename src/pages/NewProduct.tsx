@@ -1,4 +1,6 @@
-export default function NewProduct() {
+import React from "react";
+
+const NewProduct: React.FC = () => {
   return (
     <div className="flex-4 p-5">
       <h1 className="text-2xl font-bold mb-4">New Product</h1>
@@ -36,4 +38,5 @@ export default function NewProduct() {
       </form>
     </div>
   );
-}
+};
+export default NewProduct;

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AttachMoney,
   BarChart,
@@ -14,7 +15,7 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+const Sidebar: React.FC = () => {
   return (
     <div className="flex-1 h-calcVH bg-slate-50 sticky top-[50px]">
       <div className="p-5 text-slate-500">
@@ -99,4 +100,6 @@ export default function Sidebar() {
       </div>
     </div>
   );
-}
+};
+
+export default Sidebar;

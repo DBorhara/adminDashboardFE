@@ -3,9 +3,11 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { DeleteOutline } from "@mui/icons-material";
 import axios from "axios";
+import Loading from "../components/Loading";
 
-export default function UserList() {
+const UserList: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function getUsers() {
@@ -14,6 +16,7 @@ export default function UserList() {
       );
 
       setData(data);
+      setIsLoading(false);
     }
     getUsers();
   }, []);
@@ -66,6 +69,14 @@ export default function UserList() {
     },
   ];
 
+  if (isLoading) {
+    return (
+      <div className="flex-4">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
     <div className="flex-4">
       <DataGrid
@@ -82,4 +93,6 @@ export default function UserList() {
       />
     </div>
   );
-}
+};
+
+export default UserList;

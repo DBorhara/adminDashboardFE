@@ -2,9 +2,9 @@ import { Link, useParams } from "react-router-dom";
 import Chart from "../components/Chart";
 import { productData } from "../dummydata";
 import { Publish } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 
 interface IProduct {
   id: number;
@@ -15,10 +15,10 @@ interface IProduct {
   price: string | null;
 }
 
-export default function Product() {
-  const { id } = useParams();
+const Product: React.FC = () => {
+  const { id } = useParams<string>();
   const [product, setProduct] = useState<IProduct | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function getProduct() {
@@ -27,15 +27,16 @@ export default function Product() {
           `http://localhost:8080/api/product/${id}`
         );
         setProduct(data);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching product:", error);
       }
-      setLoading(false);
+      setIsLoading(false);
     }
     getProduct();
   }, []);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex-4 p-5">
         <Loading />
@@ -55,6 +56,7 @@ export default function Product() {
         <div className="grid grid-cols-2">
           <div className="topLeft">
             <Chart
+              isLoading={isLoading}
               grid
               data={productData}
               dataKey="Sales"
@@ -146,4 +148,6 @@ export default function Product() {
       </div>
     );
   }
-}
+};
+
+export default Product;

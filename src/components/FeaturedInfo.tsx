@@ -1,29 +1,42 @@
+import React from "react";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
+import Loading from "./Loading";
 
 interface SalesData {
   currMonth: number;
   priorMonth: number;
 }
 
-export default function FeaturedInfo() {
-  const [currMonthSales, setCurrMonthSales] = useState(0);
-  const [lastMonthSales, setLastMonthSales] = useState(0);
+const FeaturedInfo: React.FC = () => {
+  const [salesData, setSalesData] = useState<SalesData>({
+    currMonth: 0,
+    priorMonth: 0,
+  });
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function getSalesData() {
       const { data }: AxiosResponse<SalesData> = await axios.get(
         "http://localhost:8080/api/mps/currentMonthComparison"
       );
-      setCurrMonthSales(data.currMonth);
-      setLastMonthSales(data.priorMonth);
+      setSalesData(data);
+      setIsLoading(false);
     }
     getSalesData();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="flex-4">
+        <Loading />
+      </div>
+    );
+  }
+
   const percentageChange =
-    ((currMonthSales - lastMonthSales) / lastMonthSales) * 100;
+    ((salesData.currMonth - salesData.priorMonth) / salesData.priorMonth) * 100;
 
   return (
     <div className="w-full flex justify-between">
@@ -41,7 +54,7 @@ export default function FeaturedInfo() {
       <div className="flex-1 mx-5 my-0 p-[30px] rounded-lg cursor-pointer shadow-featuredInfoBoxShadow">
         <span className="text-lg">Sales</span>
         <div className="mx-0 my-[10px] flex items-center">
-          <span className="text-3xl font-semibold">${currMonthSales}</span>
+          <span className="text-3xl font-semibold">${salesData.currMonth}</span>
           <span className="flex items-center ml-5">
             {percentageChange.toFixed(2)}
             {percentageChange >= 0 ? (
@@ -66,4 +79,6 @@ export default function FeaturedInfo() {
       </div>
     </div>
   );
-}
+};
+
+export default FeaturedInfo;

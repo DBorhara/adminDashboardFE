@@ -1,6 +1,6 @@
-import { Visibility } from "@mui/icons-material";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { Visibility } from "@mui/icons-material";
 
 interface IUser {
   id: number;
@@ -11,7 +11,7 @@ interface IUser {
   isAdmin: boolean;
 }
 
-export default function WidgetSm() {
+const WidgetSm: React.FC = () => {
   const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
@@ -29,7 +29,10 @@ export default function WidgetSm() {
       <ul className="m-0 p-0 list-none">
         {users.map((user) => {
           return (
-            <li className="flex items-center justify-between my-5 mx-0">
+            <li
+              key={user.id}
+              className="flex items-center justify-between my-5 mx-0"
+            >
               <img
                 src={user.avatar}
                 alt="profile photo"
@@ -49,4 +52,6 @@ export default function WidgetSm() {
       </ul>
     </div>
   );
-}
+};
+
+export default WidgetSm;

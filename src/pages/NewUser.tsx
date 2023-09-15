@@ -1,4 +1,6 @@
-export default function NewUser() {
+import React from "react";
+
+const NewUser: React.FC = () => {
   return (
     <div className="flex-4">
       <h1 className="text-2xl font-bold mb-4">New User</h1>
@@ -111,4 +113,6 @@ export default function NewUser() {
       </form>
     </div>
   );
-}
+};
+
+export default NewUser;
